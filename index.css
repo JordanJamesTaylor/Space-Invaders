@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+    background: hsl(220, 70%, 30%);
+}
+
+canvas {
+    box-shadow: black 20px 10px 50px;
+    border: 5px solid white;
+    border-radius: 15px;
+    outline: 5px solid #E34234;
+}
+
+img {
+    height: 300px;
+    width: 500px;
+    margin: 15px;
+    margin-bottom: 10px;
+}
+
+h4{
+    margin: 0;
+    color: #F83B3A;
+    font-family: 'Coda Caption', fantasy;
+    font-weight: 400;
+}
+
+#controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 300px;
+    height: 100px;
+    margin-top: 25px;
+    border: 5px solid white;
+    border-radius: 15px;
+    outline: 5px solid #E34234;
+    background-color: #EBDF64;
+}
+
+.sub-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    width: 33%;
+}

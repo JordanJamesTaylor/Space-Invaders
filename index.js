@@ -19,7 +19,7 @@ const player = new Player(canvas, 3, playerLaserController); // 3 = velocity
 
 function gameLoop(){
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    // alienController.draw(ctx);
+    alienController.draw(ctx);
     player.draw(ctx);
     playerLaserController.draw(ctx);
 }
