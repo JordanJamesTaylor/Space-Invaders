@@ -21,22 +21,61 @@ export default class AlienController{
     xVelocity = 0; 
     yVelocity = 0;
     // can change speed dependant on direction of movement
-    defaultXVelocity = 1; 
+    defaultXVelocity = 0; 
     defaultYVelocity = 1;
     // move down then move horizontally
     moveDownTimerDefault = 30;
     moveDownTimer = this.moveDownTimerDefault;
+    fireLaserTimerDefault = 100;
+    fireLaserTimer = this.fireLaserTimerDefault;
 
-    constructor(canvas){
+    constructor(canvas, alienLaserController, playerLaserController){
         this.canvas = canvas;
+        this.alienLaserController = alienLaserController;
+        this.playerLaserController = playerLaserController;
+
         this.createAliens();
     }
 
     draw(ctx){ // build alien
         this.decrementMoveDownTimer();
         this.updateVelocityAndDirection();
+        this.collisionDetection();
         this.drawAliens(ctx);
         this.resetMoveDownTimer();
+        this.fireLaser();
+    }
+
+    collisionDetection(){
+        this.alienRows.forEach((alienRow) => { // grid --> alien map
+            alienRow.forEach((alien, alienIndex) => { // grid row --> row of aliens
+                if(this.playerLaserController.collideWith(alien)){ // if player hit alien
+                    // play sound
+                    
+                    // remove alien from arr
+                    alienRow.splice(alienIndex, 1);
+                }
+            });
+        });
+
+        // if all aliens on a row have been hit then remove that row
+        this.alienRows = this.alienRows.filter((alienRow) => alienRow.length > 0);
+    }
+
+    fireLaser(){
+        this.fireLaserTimer--;
+        if(this.fireLaserTimer <= 0){
+            this.fireLaserTimer = this.fireLaserTimerDefault;
+            // populate shallow arr with all aliens
+            const allAliens = this.alienRows.flat();
+            // grab a random alien from arr
+            const alienIndex = Math.floor(Math.random() * allAliens.length);
+            const alien = allAliens[alienIndex];
+            // random alien fires laser
+            // alien.x + alien.width / 2 = laser shoots from centre of alien ship
+            // -3 = laser moves down
+            this.alienLaserController.fire(alien.x + alien.width / 2, alien.y, -3);
+        }
     }
 
     resetMoveDownTimer(){

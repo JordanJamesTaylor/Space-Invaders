@@ -13,8 +13,9 @@ canvas.height = 600;
 const background = new Image();
 background.src = "images/background.png"
 
-const playerLaserController = new LaserController(canvas, 10, "red", true);
-const alienController = new AlienController(canvas);
+const playerLaserController = new LaserController(canvas, 10, "red", true, "../sounds/player-laser.wav");
+const alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
+const alienController = new AlienController(canvas, alienLaserController, playerLaserController);
 const player = new Player(canvas, 3, playerLaserController); // 3 = velocity
 
 function gameLoop(){
@@ -22,6 +23,7 @@ function gameLoop(){
     alienController.draw(ctx);
     player.draw(ctx);
     playerLaserController.draw(ctx);
+    alienLaserController.draw(ctx);
 }
 
 setInterval(gameLoop, 1000/60);
