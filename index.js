@@ -18,12 +18,48 @@ const alienLaserController = new LaserController(canvas, 4, "green", true, "../s
 const alienController = new AlienController(canvas, alienLaserController, playerLaserController);
 const player = new Player(canvas, 3, playerLaserController); // 3 = velocity
 
+let isGameOver = false;
+let playerWon = false;
+
 function gameLoop(){
+    checkGameOver();
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    alienController.draw(ctx);
-    player.draw(ctx);
-    playerLaserController.draw(ctx);
-    alienLaserController.draw(ctx);
+    displayGameOver();
+    if(!isGameOver){
+        alienController.draw(ctx);
+        player.draw(ctx);
+        playerLaserController.draw(ctx);
+        alienLaserController.draw(ctx);
+    }
 }
+
+function displayGameOver(){
+    if(isGameOver){
+        let text = playerWon ? "You win!" : "Game over.";
+        let textOffSet = playerWon ? 3.5 : 5;
+
+        ctx.fillStyle = "white";
+        ctx.font = "70px Arial";
+        ctx.fillText(text, canvas.width / textOffSet, canvas.height / 2);
+    }
+}
+
+function checkGameOver(){
+
+    if(isGameOver) return;
+
+    if(alienLaserController.collideWith(player)){
+        isGameOver = true;
+    }
+
+    if(alienController.collideWith(player)){
+        isGameOver = true;
+    }
+
+    if(alienController.alienRows.length === 0){
+        playerWon = true;
+        isGameOver = true;
+    }
+};
 
 setInterval(gameLoop, 1000/60);

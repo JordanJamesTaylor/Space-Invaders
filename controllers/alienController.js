@@ -11,7 +11,7 @@ export default class AlienController{
         [1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [0, 2, 2, 2, 1, 1, 2, 2, 2, 0],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1]
+        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ];
     alienRows = [];
 
@@ -21,8 +21,8 @@ export default class AlienController{
     xVelocity = 0; 
     yVelocity = 0;
     // can change speed dependant on direction of movement
-    defaultXVelocity = 0; 
-    defaultYVelocity = 1;
+    defaultXVelocity = 5; 
+    defaultYVelocity = 5;
     // move down then move horizontally
     moveDownTimerDefault = 30;
     moveDownTimer = this.moveDownTimerDefault;
@@ -33,6 +33,8 @@ export default class AlienController{
         this.canvas = canvas;
         this.alienLaserController = alienLaserController;
         this.playerLaserController = playerLaserController;
+        this.alienDeathSound = new Audio('./sounds/alien-death.wav');
+        this.alienDeathSound.volume = .5;
 
         this.createAliens();
     }
@@ -50,15 +52,15 @@ export default class AlienController{
         this.alienRows.forEach((alienRow) => { // grid --> alien map
             alienRow.forEach((alien, alienIndex) => { // grid row --> row of aliens
                 if(this.playerLaserController.collideWith(alien)){ // if player hit alien
-                    // play sound
-                    
+                    this.alienDeathSound.currentTime = 0;
+                    this.alienDeathSound.play();
                     // remove alien from arr
                     alienRow.splice(alienIndex, 1);
                 }
             });
         });
 
-        // if all aliens on a row have been hit then remove that row
+        // if all aliens on a row have been destroyed then remove that row
         this.alienRows = this.alienRows.filter((alienRow) => alienRow.length > 0);
     }
 
@@ -74,7 +76,9 @@ export default class AlienController{
             // random alien fires laser
             // alien.x + alien.width / 2 = laser shoots from centre of alien ship
             // -3 = laser moves down
-            this.alienLaserController.fire(alien.x + alien.width / 2, alien.y, -3);
+            // this.alienLaserController.fire(alien.x + alien.width / 2, alien.y, -3);
+            
+            this.alienLaserController.fire(alien.x, alien.y, -3);
         }
     }
 
@@ -168,5 +172,9 @@ export default class AlienController{
                 }
            }); 
         });
+    }
+
+    collideWith(sprite){
+        return this.alienRows.flat().some(alien => alien.collideWith(sprite));
     }
 }
