@@ -27,7 +27,7 @@ export default class Player{
             // this.y = ship position on y axis
             // 4 = laser firing speed
             // 10 = rate of fire (space between lasers)
-            this.laserController.fire(this.x+this.width/2, this.y, 4, 10)
+            this.laserController.fire(this.x + this.width / 2, this.y, 4, 10)
         }
         this.move();
         this.collideWithWalls();
@@ -39,7 +39,7 @@ export default class Player{
             // stop moving left
             // checks if left side of ship hits the left side of the canvas
             this.x = 0;
-        }else if(this.x > this.canvas.width -this.width){ // hit right side of canvas
+        }else if(this.x > this.canvas.width - this.width){ // hit right side of canvas
             // stop moving right
             // -this.width keeps ship on screen; checks if right part of the ship hits the right side of canvas
             this.x = this.canvas.width - this.width;
@@ -56,11 +56,11 @@ export default class Player{
 
     keydown = e => {
         // move right
-        if(e.code === 'ArrowRight') this.rightPress = true;
+        if(e.code == 'ArrowRight') this.rightPress = true;
         // move left
-        if(e.code === 'ArrowLeft') this.leftPress = true;
+        if(e.code == 'ArrowLeft') this.leftPress = true;
         // shoot
-        if(e.code === "Space") this.gunsFired = true;
+        if(e.code == "Space") this.gunsFired = true;
     }
 
     keyup = e => {
@@ -69,6 +69,6 @@ export default class Player{
         // stop moving left
         if(e.code == 'ArrowLeft') this.leftPress = false;
         // stop shooting
-        if(e.code === "Space") this.gunsFired = false;
+        if(e.code == "Space") this.gunsFired = false;
     }
 }

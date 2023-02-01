@@ -6,7 +6,7 @@ export default class Alien{
         this.y = y;
 
         // size of alien
-        this.width = 55;
+        this.width = 44;
         this.height = 32;
 
         // compare imgNum to number in alien files
@@ -22,5 +22,18 @@ export default class Alien{
     move(xVelocity, yVelocity){
         this.x += xVelocity;
         this.y += yVelocity;
+    }
+
+    collideWith(sprite) {
+        if (
+          this.x + this.width > sprite.x &&
+          this.x < sprite.x + sprite.width &&
+          this.y + this.height > sprite.y &&
+          this.y < sprite.y + sprite.height
+        ) {
+          return true;
+        } else {
+          return false;
+        }
     }
 }
