@@ -33,3 +33,4 @@ Lasers have a default total of 6 lasers on screen for the player and 4 for the a
 The rate of fire for alien ships can be configured with fireLaserTimerDefault in alienController.js. 
 
 The speed with which aliens move across and down the screen can be adjusted with defaultXVelocity and defaultYVelocity in alienController.js.
+
