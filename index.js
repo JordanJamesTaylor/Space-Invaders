@@ -16,7 +16,7 @@ background.src = "images/background.png";
 const gameOverBackground = new Image(canvas.width, canvas.height);
 gameOverBackground.src = "images/red-orange-game-over.png";
 
-const playerLaserController = new LaserController(canvas, 100, "red", true, "../sounds/player-laser.wav");
+const playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
 const alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
 const alienController = new AlienController(canvas, alienLaserController, playerLaserController);
 const player = new Player(canvas, 3, playerLaserController); // 3 = velocity
