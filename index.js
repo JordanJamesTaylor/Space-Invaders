@@ -5,8 +5,8 @@ import LaserController from "./controllers/laserController.js";
 // play space
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
-canvas.width = 600;
-canvas.height = 600;
+canvas.width = 610;
+canvas.height = 625;
 
 // play space background image
 const background = new Image("");
@@ -16,9 +16,11 @@ background.src = "images/background.png";
 const gameOverBackground = new Image(canvas.width, canvas.height);
 gameOverBackground.src = "images/red-orange-game-over.png";
 
+let score = 0;
+
 const playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
 const alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
-const alienController = new AlienController(canvas, alienLaserController, playerLaserController);
+const alienController = new AlienController(canvas, alienLaserController, playerLaserController, score);
 const player = new Player(canvas, 3, playerLaserController); // 3 = velocity
 
 let isGameOver = false;
@@ -29,6 +31,7 @@ function gameLoop(){
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     displayGameOver();
     if(!isGameOver){
+        
         alienController.draw(ctx);
         player.draw(ctx);
         playerLaserController.draw(ctx);
