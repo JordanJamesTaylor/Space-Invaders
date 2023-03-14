@@ -9,14 +9,16 @@ body {
     font-family: 'VT323', monospace;
 }
 
-/* #preloader{
+/* 
+#preloader {
     background: #000 url(images/windows84.gif) no-repeat center;
     background-size: cover;
     height: 100vh;
     width: 100%;
     position: fixed;
     z-index: 100;
-} */
+} 
+*/
 
 canvas {
     box-shadow: black 20px 10px 50px;
@@ -63,6 +65,29 @@ h4{
     border-radius: 15px;
     outline: 5px solid #E34234;
     background-color: #EBDF64;
+}
+
+#restart-btn{
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    margin-top: 25px;
+    border: 5px solid white;
+    border-radius: 15px;
+    outline: 5px solid #E34234;
+    background-color: #EBDF64;
+    color: #F83B3A;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'VT323', monospace;
+}
+
+#restart-btn:hover {background-color: #d1c758}
+
+#restart-btn:active {
+  background-color: #d1c758;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .sub-cont{
