@@ -3,7 +3,7 @@ export default class Alien{
     constructor(x, y, imgNum){
         // where the alien spawns
         this.x = x;
-        this.y = y;
+        this.y = y + 25;
 
         // size of alien
         this.width = 44;
