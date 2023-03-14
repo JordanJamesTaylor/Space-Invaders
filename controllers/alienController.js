@@ -21,8 +21,8 @@ export default class AlienController{
     xVelocity = 0; 
     yVelocity = 0;
     // can change speed dependant on direction of movement
-    defaultXVelocity = 5; 
-    defaultYVelocity = 5;
+    defaultXVelocity = 1; 
+     defaultYVelocity = 1;
     // move down then move horizontally
     moveDownTimerDefault = 30;
     moveDownTimer = this.moveDownTimerDefault;
@@ -34,7 +34,7 @@ export default class AlienController{
         this.alienLaserController = alienLaserController;
         this.playerLaserController = playerLaserController;
         this.alienDeathSound = new Audio('./sounds/alien-death.wav');
-        this.alienDeathSound.volume = .5;
+        this.alienDeathSound.volume = .2;
 
         this.createAliens();
     }
@@ -54,6 +54,8 @@ export default class AlienController{
                 if(this.playerLaserController.collideWith(alien)){ // if player hit alien
                     this.alienDeathSound.currentTime = 0;
                     this.alienDeathSound.play();
+                    // update player score
+                    
                     // remove alien from arr
                     alienRow.splice(alienIndex, 1);
                 }

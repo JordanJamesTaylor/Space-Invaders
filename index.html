@@ -7,23 +7,41 @@
     <title>Alien Invaders</title>
     <link rel="icon" type="image" href="images/favicon.png" />
     <link rel="stylesheet" href="./index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+
+
+    <div id="preloader">
+        
+    </div>
+
+
     <img src="images/title.png" />
+
+    <div id="player-info">
+        <h3> Player Score: </h3>
+        <span style="width: 230px;"></span>
+        <h3> Remaining Lives: </h3>
+        <!-- <img scr="" /> -->
+    </div>
+
     <canvas id="game"></canvas>
     <script type="module" src="index.js"></script>
     <div id="controls">
         <div class="sub-cont">
             <h4>Move Left:</h4>
-            <h3>←</h3>
+            <h4>←</h4>
         </div>
         <div class="sub-cont">
             <h4>Move Right:</h4>
-            <h3>→</h3>
+            <h4>→</h4>
         </div>
         <div class="sub-cont">
             <h4>Fire Lasers:</h4>
-            <h3>⎵</h3>
+            <h4>⎵</h4>
         </div>
     </div>
 </body>

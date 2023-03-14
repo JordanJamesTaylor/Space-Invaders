@@ -4,7 +4,7 @@ export default class LaserController{
 
     // tracks lasers on screen --> max is set to 10
     lasers = [];
-    timeTillNextLaserAllowed = 0;
+    timeTillNextLaserAllowed = 5;
 
     constructor(canvas, maxLasersOnScreen, laserColour, soundEnabled, laserSound){
         this.canvas = canvas;
@@ -34,7 +34,6 @@ export default class LaserController{
     
         if (laserThatHitSpriteIndex >= 0) {
             this.lasers.splice(laserThatHitSpriteIndex, 1);
-            console.log("COLLISION!");
             return true;
           }
     
