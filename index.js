@@ -20,19 +20,27 @@ let score = 0;
 
 const playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
 const alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
-const alienController = new AlienController(canvas, alienLaserController, playerLaserController, score);
-const player = new Player(canvas, 3, playerLaserController); // 3 = velocity
+const alienController = new AlienController(canvas, alienLaserController, playerLaserController);
+const player = new Player(canvas, 3, playerLaserController, score); // 3 = velocity
 
 let isGameOver = false;
 let playerWon = false;
+
+function drawScore(ctx){
+    // console.log("scoring")
+    ctx.font = "24px Arial";
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText(`Score: ${score}`, 10, 25)
+}
 
 function gameLoop(){
     checkGameOver();
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     displayGameOver();
     if(!isGameOver){
-        
+        drawScore(ctx);
         alienController.draw(ctx);
+        score = alienController.totalScore;
         player.draw(ctx);
         playerLaserController.draw(ctx);
         alienLaserController.draw(ctx);
@@ -41,12 +49,14 @@ function gameLoop(){
 
 function displayGameOver(){
     if(isGameOver && playerWon){
+        console.log("SCORE: ", score);
         let text = "YOU WIN!";
         let textOffSet = 3;
         ctx.font = "95px VT323";
         ctx.fillText(text, canvas.width / textOffSet, canvas.height / 2);
         // ctx.drawImage()
     }else if(isGameOver){
+        console.log("SCORE: ", score);
         ctx.drawImage(gameOverBackground, 0, 0, canvas.width, canvas.height);
     }
 }

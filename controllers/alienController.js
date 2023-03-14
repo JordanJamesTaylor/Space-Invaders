@@ -28,32 +28,25 @@ export default class AlienController{
     moveDownTimer = this.moveDownTimerDefault;
     fireLaserTimerDefault = 100;
     fireLaserTimer = this.fireLaserTimerDefault;
-
-    constructor(canvas, alienLaserController, playerLaserController, playerScore){
+    
+    constructor(canvas, alienLaserController, playerLaserController){
         this.canvas = canvas;
         this.alienLaserController = alienLaserController;
         this.playerLaserController = playerLaserController;
         this.alienDeathSound = new Audio('./sounds/alien-death.wav');
         this.alienDeathSound.volume = .2;
-        this.playerScore = playerScore;
+        this.totalScore = 0;
 
         this.createAliens();
     }
 
     draw(ctx){ // build alien
-        this.drawScore(ctx);
         this.decrementMoveDownTimer();
         this.updateVelocityAndDirection();
         this.collisionDetection();
         this.drawAliens(ctx);
         this.resetMoveDownTimer();
         this.fireLaser();
-    }
-
-    drawScore(ctx){
-        ctx.font = "24px Arial";
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText(`Score: ${this.playerScore}`, 10, 25)
     }
 
     collisionDetection(){
@@ -63,7 +56,7 @@ export default class AlienController{
                     this.alienDeathSound.currentTime = 0;
                     this.alienDeathSound.play();
                     // update player score
-                    this.playerScore += alienRow[alienIndex].pointVal
+                    this.totalScore += alienRow[alienIndex].pointVal
                     // remove alien from arr
                     alienRow.splice(alienIndex, 1);
                 }
