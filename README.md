@@ -1,6 +1,6 @@
 
 # Alien Invasion
-## A fully functional game showcasing OOP, and core HTML and CSS implementation focusing on CANVAS. 
+## A fully functional game showcasing OOP, with core HTML and CSS implementation focusing on CANVAS. 
 
 In Alien Invasion, the player controls a spaceship that appears at the bottom centre of the screen. The player can move the ship left to right using arrow keys and shoot using the space bar. When the game begins, a fleet of aliens fills the sky, moving across and down the screen. The player's aim is to shoot and destroy the alien invaders! 
 
