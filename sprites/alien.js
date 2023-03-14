@@ -13,6 +13,10 @@ export default class Alien{
         // set alien based on num 
         this.img = new Image();
         this.img.src = `images/alien${imgNum}.png`
+        // assign points based on colour
+        if(imgNum === 1) this.pointVal = 50;
+        if(imgNum === 2) this.pointVal = 100;
+        if(imgNum === 3) this.pointVal = 250;
     }
 
     draw(ctx){
