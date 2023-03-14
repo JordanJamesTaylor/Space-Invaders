@@ -1,3 +1,4 @@
+![Space Invaders gameplay](https://user-images.githubusercontent.com/76962195/225073760-54bafafb-e224-4009-84a7-3dc7ea963ec6.png)
 
 # Alien Invasion
 ## A fully functional game showcasing OOP, with core HTML and CSS implementation focusing on CANVAS. 
@@ -34,3 +35,4 @@ The rate of fire for alien ships can be configured with fireLaserTimerDefault in
 
 The speed with which aliens move across and down the screen can be adjusted with defaultXVelocity and defaultYVelocity in alienController.js.
 
+![Space Invaders gameover](https://user-images.githubusercontent.com/76962195/225074004-f30ef4d4-d6ac-4939-813e-f728b5a81c9f.png)
