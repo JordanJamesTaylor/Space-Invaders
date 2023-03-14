@@ -22,7 +22,7 @@ export default class AlienController{
     yVelocity = 0;
     // can change speed dependant on direction of movement
     defaultXVelocity = 1; 
-     defaultYVelocity = 1;
+    defaultYVelocity = 1;
     // move down then move horizontally
     moveDownTimerDefault = 30;
     moveDownTimer = this.moveDownTimerDefault;
