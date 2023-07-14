@@ -4,49 +4,41 @@ body {
     flex-direction: column;
     padding: 0px;
     margin: 0px;
-    max-height: 100vh;
     background: hsl(220, 70%, 30%);
     font-family: 'VT323', monospace;
 }
 
-/* 
-#preloader {
-    background: #000 url(images/windows84.gif) no-repeat center;
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    z-index: 100;
-} 
-*/
+body::-webkit-scrollbar {
+    display: none;
+}
 
-canvas {
+#game {
+    display: flex;
     box-shadow: black 20px 10px 50px;
     border: 5px solid white;
     border-radius: 15px;
     outline: 5px solid #E34234;
 }
 
-img {
-    height: 150px;
-    width: 500px;
+#game-title {
+    display: flex;
+    max-width: 27rem;
     margin: 10px;
-    margin-bottom: 10px;
 }
 
-h3{
+h3 {
     margin: 0;
     margin-bottom: 15px;
 }
 
-h4{
+h4 {
     margin: 0;
     color: #F83B3A;
     font-size: 35px;
     font-weight: bold;
 }
 
-#player-info{
+#player-info {
     display: flex;
     justify-content: flex-start;
     margin: 0;
@@ -58,31 +50,33 @@ h4{
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 600px;
-    height: 100px;
-    margin-top: 15px;
+    width: 36rem;
+    height: 5rem;
+    margin-top: 2rem;
     border: 5px solid white;
     border-radius: 15px;
     outline: 5px solid #E34234;
     background-color: #EBDF64;
 }
 
-#restart-btn{
+#restart-btn {
     cursor: pointer;
-    width: 150px;
-    height: 50px;
-    margin-top: 25px;
+    width: 9rem;
+    margin: 25px 0 25px 0;
     border: 5px solid white;
     border-radius: 15px;
     outline: 5px solid #E34234;
     background-color: #EBDF64;
     color: #F83B3A;
-    font-size: 30px;
+    font-size: 2rem;
     font-weight: bold;
     font-family: 'VT323', monospace;
 }
 
-#restart-btn:hover {background-color: #d1c758}
+#restart-btn:hover {
+    background-color: #d1c758;
+    transform: scale(1.5);
+}
 
 #restart-btn:active {
   background-color: #d1c758;
@@ -90,7 +84,7 @@ h4{
   transform: translateY(4px);
 }
 
-.sub-cont{
+.sub-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
