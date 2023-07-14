@@ -46,23 +46,34 @@ h4 {
     color: white;
 }
 
+#controls-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly; 
+    margin: 2rem 0 2rem 0;
+    width: 42rem;
+}
+
 #controls {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 36rem;
+    justify-content: space-evenly;
+    width: 25rem;
     height: 5rem;
-    margin-top: 2rem;
     border: 5px solid white;
     border-radius: 15px;
     outline: 5px solid #E34234;
     background-color: #EBDF64;
 }
 
-#restart-btn {
+#play-btn {
     cursor: pointer;
-    width: 9rem;
-    margin: 25px 0 25px 0;
+    width: 10rem;
+    height: 5.57rem;
+    border: none;
+    background-color: #EBDF64;
     border: 5px solid white;
     border-radius: 15px;
     outline: 5px solid #E34234;
@@ -73,9 +84,10 @@ h4 {
     font-family: 'VT323', monospace;
 }
 
-#restart-btn:hover {
+#restart-btn:hover, #continue-btn:hover {
     background-color: #d1c758;
-    transform: scale(1.5);
+    transform: scale(1.1);
+    box-shadow: 0 0 0.5rem 0.5rem rgba(180, 214, 255, 0.3);
 }
 
 #restart-btn:active {
@@ -88,7 +100,5 @@ h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px;
-    width: 33%;
-    font-size: 25px;
+    justify-content: center;
 }

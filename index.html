@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="./index.js"></script>
 </head>
 <body>
     <div id="preloader"></div>
@@ -19,20 +20,26 @@
     </div>
     <canvas id="game"></canvas>
     <script type="module" src="index.js"></script>
-    <div id="controls">
-        <div class="sub-cont">
-            <h4>Move Left:</h4>
-            <h4>←</h4>
+    <div id="controls-container">
+        <div id="controls">
+            <div class="sub-cont">
+                <h4>Left:</h4>
+                <!-- <h4>←</h4> -->
+                <img src="./images/left-btn.png" alt="button to move left" style="height: 2rem">
+            </div>
+            <div class="sub-cont">
+                <h4>Lasers:</h4>
+                <!-- <h4 style="margin-bottom: 0.2rem;">⎵</h4> -->
+                <img src="./images/space-btn.jpg" alt="button to shoot lasers" style="height: 2rem">
+            </div> 
+            <div class="sub-cont">
+                <h4>Right:</h4>
+                <!-- <h4>→</h4> -->
+                <img src="./images/right-btn.png" alt="button to move right" style="height: 2rem">
+            </div>
         </div>
-        <div class="sub-cont">
-            <h4>Move Right:</h4>
-            <h4>→</h4>
-        </div>
-        <div class="sub-cont">
-            <h4>Fire Lasers:</h4>
-            <h4>⎵</h4>
-        </div> 
+        <button id="play-btn" value="false">Restart</button>
+        <!-- <button id="restart-btn" onClick="window.location.href=window.location.href">Restart</button> -->
     </div>
-    <button id="restart-btn" onClick="window.location.href=window.location.href">Restart</button>
 </body>
 </html>

@@ -14,19 +14,42 @@ background.src = "images/background.png";
 
 // game screen canvas background
 const gameOverBackground = new Image(canvas.width, canvas.height);
-gameOverBackground.src = "images/red-orange-game-over.png";
+gameOverBackground.src = "images/game-over.png";
 const gameWinBackground = new Image(canvas.width, canvas.height);
-gameWinBackground.src = "./images/game-winner.jpg";
+gameWinBackground.src = "./images/game-won.png";
 
 let score = 0;
 
-const playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
-const alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
-const alienController = new AlienController(canvas, alienLaserController, playerLaserController);
-const player = new Player(canvas, 3, playerLaserController, score); // 3 = velocity
+let playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
+let alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
+let alienController = new AlienController(canvas, alienLaserController, playerLaserController);
+let player = new Player(canvas, 3, playerLaserController, score); // 3 = velocity
+
+function rebuildSprites() {
+    playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
+    alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
+    alienController = new AlienController(canvas, alienLaserController, playerLaserController);
+    player = new Player(canvas, 3, playerLaserController, score); // 3 = velocity
+    playBtn.textContent = 'Restart';
+};
 
 let isGameOver = false;
 let playerWon = false;
+
+
+const playBtn = document.getElementById("play-btn");
+function continuePlay() {
+    if(playBtn.textContent === 'Restart'){
+        window.location.href=window.location.href
+    }else{
+        console.log('NEXT LEVEL');
+        playBtn.value = true;
+    };
+};
+
+console.log(playBtn.textContent);
+
+playBtn.addEventListener("click",continuePlay); 
 
 function drawScore(ctx){
     ctx.font = "24px Arial";
@@ -34,7 +57,7 @@ function drawScore(ctx){
     ctx.fillText(`Score: ${score}`, 10, 25)
 };
 
-function gameLoop(){
+function gameLoop(){    
     checkGameOver();
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     displayGameOver();
@@ -50,16 +73,54 @@ function gameLoop(){
 
 function displayGameOver(){
     if(isGameOver && playerWon){
-        // let text = "YOU WIN!";
-        // let textOffSet = 3;
-        // ctx.font = "95px VT323";
-        // ctx.fillText(text, canvas.width / textOffSet, canvas.height / 2);
-        ctx.drawImage(gameWinBackground, 0, 0, canvas.width, canvas.height);
+        if(playBtn.value === 'false'){
+            
+            console.log(playBtn.value);
+
+            playBtn.value = 'false';
+
+            ctx.fillStyle = `green`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(gameWinBackground, 0, 0, canvas.width, canvas.height);
+        }else{
+
+            console.log('--- GAME CONTINUED ---');
+            console.log(playBtn.value);
+            playerWon = false;  
+            playBtn.value = 'false';
+
+            console.log('CONTINUE CHANGED: ', playBtn.value);
+
+            rebuildSprites();
+            ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+            isGameOver = false;
+            return;
+        };
     }else if(isGameOver){
-        ctx.drawImage(gameOverBackground, 0, 0, canvas.width, canvas.height);
+
+        console.log('GAME OVER CONTINUE: ', playBtn.value);
+
+        if(playBtn.value === 'false'){
+            ctx.fillStyle = `red`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(gameOverBackground, 0, 0, canvas.width, canvas.height);
+        }else{
+
+            console.log('--- GAME CONTINUED ---');
+            console.log('CONINUE VALUE: ', playBtn.value);
+
+            playBtn.value = 'false';
+
+            console.log('VALUE CHANGED: ', playBtn.value);
+
+            rebuildSprites();
+            ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+            isGameOver = false;
+            return;
+        };
     };
 };
-
+ 
 function checkGameOver(){
 
     const winSound = new Audio("./sounds/winner.wav");
@@ -68,6 +129,7 @@ function checkGameOver(){
     if(isGameOver) return;
 
     if(alienController.alienRows.length === 0){
+        playBtn.textContent = 'Continue?';
         winSound.play();
         playerWon = true;
         isGameOver = true;
