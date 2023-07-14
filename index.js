@@ -6,7 +6,7 @@ import LaserController from "./controllers/laserController.js";
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 canvas.width = 610;
-canvas.height = 510;
+canvas.height = 475;
 
 // play space background image
 const background = new Image("");
@@ -18,43 +18,39 @@ gameOverBackground.src = "images/game-over.png";
 const gameWinBackground = new Image(canvas.width, canvas.height);
 gameWinBackground.src = "./images/game-won.png";
 
-let score = 0;
-
 let playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
 let alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
 let alienController = new AlienController(canvas, alienLaserController, playerLaserController);
-let player = new Player(canvas, 3, playerLaserController, score); // 3 = velocity
+let player = new Player(canvas, 3, playerLaserController); // 3 = velocity
 
 function rebuildSprites() {
     playerLaserController = new LaserController(canvas, 6, "red", true, "../sounds/player-laser.wav");
     alienLaserController = new LaserController(canvas, 4, "green", true, "../sounds/alien-laser.wav");
     alienController = new AlienController(canvas, alienLaserController, playerLaserController);
-    player = new Player(canvas, 3, playerLaserController, score); // 3 = velocity
+    player = new Player(canvas, 3, playerLaserController); // 3 = velocity
     playBtn.textContent = 'Restart';
 };
 
 let isGameOver = false;
 let playerWon = false;
 
-
 const playBtn = document.getElementById("play-btn");
 function continuePlay() {
     if(playBtn.textContent === 'Restart'){
         window.location.href=window.location.href
     }else{
-        console.log('NEXT LEVEL');
         playBtn.value = true;
     };
 };
-
-console.log(playBtn.textContent);
-
 playBtn.addEventListener("click",continuePlay); 
+
+let score = 0;
+let highScore = 0;
 
 function drawScore(ctx){
     ctx.font = "24px Arial";
-    ctx.fillStyle = "#ffffff";
-    ctx.fillText(`Score: ${score}`, 10, 25)
+    ctx.fillStyle = "#fff";
+    ctx.fillText(`Score: ${score}`, 10, 25);
 };
 
 function gameLoop(){    
@@ -74,45 +70,25 @@ function gameLoop(){
 function displayGameOver(){
     if(isGameOver && playerWon){
         if(playBtn.value === 'false'){
-            
-            console.log(playBtn.value);
-
             playBtn.value = 'false';
-
             ctx.fillStyle = `green`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(gameWinBackground, 0, 0, canvas.width, canvas.height);
         }else{
-
-            console.log('--- GAME CONTINUED ---');
-            console.log(playBtn.value);
             playerWon = false;  
             playBtn.value = 'false';
-
-            console.log('CONTINUE CHANGED: ', playBtn.value);
-
             rebuildSprites();
             ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
             isGameOver = false;
             return;
         };
     }else if(isGameOver){
-
-        console.log('GAME OVER CONTINUE: ', playBtn.value);
-
         if(playBtn.value === 'false'){
             ctx.fillStyle = `red`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(gameOverBackground, 0, 0, canvas.width, canvas.height);
         }else{
-
-            console.log('--- GAME CONTINUED ---');
-            console.log('CONINUE VALUE: ', playBtn.value);
-
             playBtn.value = 'false';
-
-            console.log('VALUE CHANGED: ', playBtn.value);
-
             rebuildSprites();
             ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
             isGameOver = false;
